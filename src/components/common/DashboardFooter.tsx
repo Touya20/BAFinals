@@ -1,0 +1,1 @@
+export function DashboardFooter(){return <footer>ROADREADY MOTOR WORKS · SIMULATED CASE DATA · 2025—2026</footer>}

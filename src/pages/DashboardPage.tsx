@@ -1,0 +1,7 @@
+import{useState}from'react';
+import{DashboardHeader}from'../components/common/DashboardHeader';
+import{DashboardFooter}from'../components/common/DashboardFooter';
+import{DescriptiveFeature}from'../components/features/DescriptiveFeature';
+import{PredictiveFeature}from'../components/features/PredictiveFeature';
+import{PrescriptiveFeature}from'../components/features/PrescriptiveFeature';
+export default function DashboardPage(){const[stage,setStage]=useState(0),[growth,setGrowth]=useState(0),[from,setFrom]=useState(0),[to,setTo]=useState(11);return <main className="shell"><DashboardHeader/><section className="hero"><div><small>OPERATIONS INTELLIGENCE · 2025—2026</small><h1>Make every workshop<br/><em>decision count.</em></h1><p>A clear view of performance, upcoming demand and the actions that protect your margin.</p></div></section><nav role="tablist">{['Descriptive','Predictive','Prescriptive'].map((name,index)=><button role="tab" aria-selected={stage===index} className={stage===index?'active':''} onClick={()=>setStage(index)} key={name}><small>0{index+1}</small><b>{name}</b><span>{['What happened?','What comes next?','What should we do?'][index]}</span></button>)}</nav>{stage===0&&<DescriptiveFeature from={from} to={to} setFrom={setFrom} setTo={setTo} onNext={()=>setStage(1)}/>}{stage===1&&<PredictiveFeature growth={growth} setGrowth={setGrowth} onNext={()=>setStage(2)}/>}{stage===2&&<PrescriptiveFeature growth={growth}/>}<DashboardFooter/></main>}

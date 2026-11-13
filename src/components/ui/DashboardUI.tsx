@@ -1,0 +1,8 @@
+import type {ReactNode} from 'react';
+import {colors,money} from '../../lib/roadready';
+export function MetricCard({label,value,note}:{label:string;value:string;note:string}){return <article className="card k"><small>{label}</small><strong>{value}</strong><span>{note}</span></article>}
+export type BarDatum={name:string;value:number;color?:string};
+export function BarChart({title,data,unit=''}:{title:string;data:BarDatum[];unit?:string}){const max=Math.max(1,...data.map(x=>x.value));return <section className="card chart"><h3>{title}</h3>{data.map((item,index)=><div className="row" key={item.name}><span>{item.name}</span><div className="track"><i style={{width:Math.max(2,item.value/max*100)+'%',background:item.color||colors[index%colors.length]}}/></div><b>{unit==='₱'?money(item.value):Math.round(item.value).toLocaleString()+(unit?' '+unit:'')}</b></div>)}</section>}
+export function RangeControl({label,value,min,max,onChange,suffix=''}:{label:string;value:number;min:number;max:number;onChange:(value:number)=>void;suffix?:string}){return <label className="range-control">{label}<b>{value}{suffix}</b><input type="range" min={min} max={max} value={value} onChange={event=>onChange(Number(event.target.value))}/></label>}
+export function MonthSelect({label,value,onChange,months}:{label:string;value:number;onChange:(value:number)=>void;months:string[]}){return <label>{label}<select value={value} onChange={event=>onChange(Number(event.target.value))}>{months.map((month,index)=><option key={month} value={index}>{month}</option>)}</select></label>}
+export function ActionButton({children,onClick}:{children:ReactNode;onClick:()=>void}){return <button onClick={onClick}>{children}</button>}

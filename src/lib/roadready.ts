@@ -1,0 +1,10 @@
+export const services=['Preventive maintenance','Brakes, tires & chain','Electrical & ignition','Engine & transmission','Accident & body repair'];
+export const shortServices=['Preventive','Brakes/tires','Electrical','Overhaul','Body repair'];
+export const colors=['#4c7cf3','#e59b45','#32a89a','#ab78d2','#e16b78'];
+export const months=['Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26','Oct 26'];
+export const annualJobs=[1320,480,288,192,120];
+export const tickets=[1200,2500,2000,8000,3000];
+export const partsCosts=[480,1125,700,3200,1500];
+export type Job={month:number;service:number;price:number;parts:number;mechanic:string;delayReason:string;laborHours:number;weekday:string};
+export const jobs:Job[]=Array.from({length:2400},(_,i)=>{const service=i%20<11?0:i%20<15?1:i%20<17?2:i%20<19?3:4;const late=i%10<7?0:1;return{month:i%12,service,price:tickets[service],parts:partsCosts[service],mechanic:['Alex','Bea','Carlo','Dina'][i%4],delayReason:late?(i%2?'Parts stockout':'Mechanic overload'):'On time',laborHours:[1,2.5,3,16,6][service],weekday:['Mon','Tue','Wed','Thu','Fri','Sat'][i%6]};});
+export const money=(value:number)=>'₱'+Math.round(value).toLocaleString('en-PH');
